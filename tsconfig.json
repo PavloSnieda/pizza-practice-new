@@ -1,0 +1,50 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx"
+    },
+    "include": [
+        "src",
+        "src/@types"
+    ],
+}
+// {
+//     "compileOnSave": true,
+//     "compilerOptions": {
+//         "emitDecoratorMetadata": true,
+//         "experimentalDecorators": true,
+//         "lib": [
+//             "es5",
+//             "dom"
+//         ],
+//         "module": "commonjs",
+//         "moduleResolution": "node",
+//         "noEmitOnError": true,
+//         "noImplicitAny": false,
+//         "outDir": "../wwwroot/app/",
+//         "removeComments": false,
+//         "sourceMap": true,
+//         "target": "es6"
+//     },
+//     "exclude": [
+//         "../wwwroot/app",
+//         "node_modules/*"
+//     ]
+// }

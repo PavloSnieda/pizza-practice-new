@@ -1,7 +1,21 @@
 import React from "react";
+//types 
+import { PropsSort, ItemPopup } from '../types/types'
 
 
-function Sort() {
+
+const Sort: React.FC<PropsSort> = ({ setSort, sortActive }) => {
+
+    const [turnPopup, setTurnPopup] = React.useState<Boolean>(false)
+
+    const PopupLists: ItemPopup[] = [
+        { id: 0, title: 'популярности' },
+        { id: 2, title: 'цене' },
+        { id: 3, title: 'алфавиту' }
+    ]
+
+    const active: ItemPopup | undefined = PopupLists.find((el) => el.id === sortActive)
+
     return (
         <div className="sort">
             <div className="sort__label">
@@ -17,16 +31,16 @@ function Sort() {
                         fill="#2C2C2C"
                     />
                 </svg>
-                <b>Сортировка по:</b>
-                <span>популярности</span>
+                <b onClick={() => setTurnPopup(!turnPopup)}>Сортировка по:</b>
+                <span onClick={() => setTurnPopup(!turnPopup)}>{active?.title}</span>
             </div>
-            <div className="sort__popup">
+            {turnPopup ? <div className="sort__popup">
                 <ul>
-                    <li className="active">популярности</li>
-                    <li>цене</li>
-                    <li>алфавиту</li>
+                    {PopupLists.map((el) => {
+                        return <li key={el.id} onClick={() => setSort(el.id)} className={el.id === sortActive ? 'active' : ''}>{el.title}</li>
+                    })}
                 </ul>
-            </div>
+            </div> : ''}
         </div>
     )
 }

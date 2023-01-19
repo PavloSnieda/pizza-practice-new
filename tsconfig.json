@@ -23,28 +23,33 @@
     "include": [
         "src",
         "src/@types"
-    ],
+    ]
 }
 // {
-//     "compileOnSave": true,
 //     "compilerOptions": {
-//         "emitDecoratorMetadata": true,
-//         "experimentalDecorators": true,
+//         "target": "es6",
 //         "lib": [
-//             "es5",
-//             "dom"
+//             "dom",
+//             "dom.iterable",
+//             "esnext"
 //         ],
-//         "module": "commonjs",
+//         "allowJs": true,
+//         "skipLibCheck": true,
+//         "esModuleInterop": true,
+//         "strict": true,
+//         "forceConsistentCasingInFileNames": true,
+//         "noFallthroughCasesInSwitch": true,
+//         "module": "esnext",
 //         "moduleResolution": "node",
-//         "noEmitOnError": true,
-//         "noImplicitAny": false,
-//         "outDir": "../wwwroot/app/",
-//         "removeComments": false,
-//         "sourceMap": true,
-//         "target": "es6"
-//     },
-//     "exclude": [
-//         "../wwwroot/app",
-//         "node_modules/*"
-//     ]
+//         "resolveJsonModule": true,
+//         "isolatedModules": true,
+//         "noEmit": true,
+//         "jsx": "react",
+//         "baseUrl": "../client/src",
+//         "checkJs": false,
+//         "outDir": "./build",
+//         "rootDir": "./src",
+//         "removeComments": true,
+//         "pretty": true
+//     }
 // }

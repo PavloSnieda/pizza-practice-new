@@ -1,12 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
 import pizzaSlice from './pizzas/slicePizza'
+import filterSlice from './fiter/filterSlice'
 
 const store = configureStore({
     reducer: {
-        pizzaSlice
+        pizzaSlice,
+        filterSlice
     }
 });
+
 
 export type AppDispatch = typeof store.dispatch // #вопрос
 export const useAppDispatch: () => AppDispatch = useDispatch // #вопрос

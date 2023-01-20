@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
-function PizzaBlog({ price, title, imageUrl, sizes, types }) {
+//types 
+import { PizzaType } from "../types/types";
+const PizzaBlog: React.FC<PizzaType> = ({ price, title, imageUrl, sizes, types }) => {
 
     const [sizeCount, sizeSet] = useState(0)
     const [typesCount, typesSet] = useState(0)

@@ -1,20 +1,16 @@
 import React from "react";
+//redux 
+import { useSelector } from "react-redux";
+import { useAppDispatch } from '../redux/store'
+import { setSort } from '../redux/fiter/filterSlice'
 //types 
 import { PropsSort, ItemPopup } from '../types/types'
 
-
-
-const Sort: React.FC<PropsSort> = ({ setSort, sortActive }) => {
+const Sort: React.FC<PropsSort> = ({ activeSort, sortLists }) => {
 
     const [turnPopup, setTurnPopup] = React.useState<Boolean>(false)
-
-    const PopupLists: ItemPopup[] = [
-        { id: 0, title: 'популярности' },
-        { id: 2, title: 'цене' },
-        { id: 3, title: 'алфавиту' }
-    ]
-
-    const active: ItemPopup | undefined = PopupLists.find((el) => el.id === sortActive)
+    const dispatch = useAppDispatch()
+    const active: ItemPopup | undefined = sortLists.find((el) => el.id === activeSort.id)
 
     return (
         <div className="sort">
@@ -36,8 +32,8 @@ const Sort: React.FC<PropsSort> = ({ setSort, sortActive }) => {
             </div>
             {turnPopup ? <div className="sort__popup">
                 <ul>
-                    {PopupLists.map((el) => {
-                        return <li key={el.id} onClick={() => setSort(el.id)} className={el.id === sortActive ? 'active' : ''}>{el.title}</li>
+                    {sortLists.map((el) => {
+                        return <li key={el.id} onClick={() => dispatch(setSort(el))} className={el === active ? 'active' : ''}>{el.title}</li>
                     })}
                 </ul>
             </div> : ''}

@@ -1,6 +1,14 @@
 import React from "react";
+//redux
+import { setValue } from '../redux/fiter/filterSlice'
+import { useAppDispatch } from '../redux/store'
+//types 
+import { HeaderProps } from '../types/types'
 
-function Header() {
+const Header: React.FC<HeaderProps> = ({ searchValue }) => {
+    const dispatch = useAppDispatch()
+
+
     return (
         <div className="header">
             <div className="container">
@@ -10,6 +18,17 @@ function Header() {
                         <h1>React Pizza</h1>
                         <p>самая вкусная пицца во вселенной</p>
                     </div>
+                    {/* input */}
+                    <input value={searchValue} onChange={(e) => dispatch(setValue(e.target.value))} className="search" type="text" placeholder="Найти пиццу" />
+                    <svg onClick={() => dispatch(setValue(''))} className="svg__clear" xmlns="http://www.w3.org/2000/svg" version="1.1" id="Capa_1" x="0px" y="0px" width="612px" height="612px" viewBox="0 0 612 612" xmlSpace="preserve">
+                        <g>
+                            <g id="_x38__41_">
+                                <g>
+                                    <path d="M444.644,306l138.644-138.644c38.284-38.284,38.284-100.36,0-138.644c-38.283-38.284-100.359-38.284-138.644,0     L306,167.356L167.356,28.713c-38.284-38.284-100.36-38.284-138.644,0s-38.284,100.36,0,138.644L167.356,306L28.713,444.644     c-38.284,38.283-38.284,100.36,0,138.644c38.284,38.284,100.36,38.284,138.644,0L306,444.644l138.644,138.644     c38.283,38.284,100.36,38.284,138.644,0c38.284-38.283,38.284-100.36,0-138.644L444.644,306z" />
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
                 </div>
                 <div className="header__cart">
                     <a href="/cart.html" className="button button--cart">

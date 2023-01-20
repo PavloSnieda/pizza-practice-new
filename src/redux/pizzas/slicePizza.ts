@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { initialStatePizzas, PizzaType, PizzaStatus } from '../../types/types'
+import { initialStatePizzas, PizzaType, PizzaStatus, TypeAsyncThunk } from '../../types/types'
+// import { RootState } from '../../redux/store'
 
 interface actionPizza {
     type: string
@@ -8,9 +9,13 @@ interface actionPizza {
 }
 
 export const getPizzaFetch = createAsyncThunk('users/getPizzaFetch',
-    async (thunkAPI) => {
+    async ({ sort, categoryId, sortFilter, searchValue }: TypeAsyncThunk, thunkAPI) => {
 
-        const { data } = await axios('https://63c810d85c0760f69ac471a8.mockapi.io/pizzas/pizzas')
+        const sortFetch = `sortBy=${sort}`
+        const sortFilterFetch = `order=${sortFilter}`
+        const categoryFetch = categoryId === 0 ? '' : `category=${categoryId}`
+        const searchValueFetch = searchValue ? `search=${searchValue.toLowerCase()}` : ''
+        const { data } = await axios(`https://63c810d85c0760f69ac471a8.mockapi.io/pizzas/pizzas?${sortFetch}&${sortFilterFetch}&${categoryFetch}&${searchValueFetch}`)
         return data
     }
 )
@@ -45,10 +50,6 @@ const pizzaSlice = createSlice({
         });
     },
 })
-
-
-
-
 
 export const { setPizzas } = pizzaSlice.actions
 export default pizzaSlice.reducer

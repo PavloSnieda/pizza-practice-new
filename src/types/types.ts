@@ -10,6 +10,7 @@ export interface ItemPopup {
 }
 
 //slicePizza
+
 export interface PizzaType {
     "id": number,
     "imageUrl": string,

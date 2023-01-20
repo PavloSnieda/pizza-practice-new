@@ -1,51 +1,32 @@
 import React from 'react';
-import { useSelector } from 'react-redux'
-import PizzaBlog from './components/PizzaBlog';
+//pages & components
 import Header from './components/Header';
-import Categories from './components/Сategories';
-import Sort from './components/Sort';
+import Home from './Pages/Home'
+import NotFound from './Pages/NotFound';
+
 import './scss/app.scss';
-import { getPizzaFetch } from './redux/pizzas/slicePizza'
-import { useAppDispatch } from './redux/store'
-//types 
-import { RootState } from './redux/store'
-import { PizzaType } from './types/types'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 
 const App: React.FC = () => {
 
-  const [sortActive, sortActiveSet] = React.useState(0)
-  const dispatch = useAppDispatch()
-  const pizzas = useSelector((state: RootState) => state.pizzaSlice.pizzas)
-
-  function setSort(i: number): void {
-    sortActiveSet(i)
-  }
-
-  React.useEffect(() => {
-    dispatch(getPizzaFetch())
-  }, [])
 
   return (
+    <BrowserRouter>
+      <div className="wrapper">
+        <Header />
+        <div className="content">
+          <div className="container">
+            <Routes>
+              <Route path='/' element={<Home />}></Route>
+              <Route path='*' element={<NotFound />}></Route>
+            </Routes>
 
-    <div className="wrapper">
-      <Header />
-      <div className="content">
-        <div className="container">
-          <div className="content__top">
-            <Categories />
 
-            <Sort sortActive={sortActive} setSort={setSort} />
-          </div>
-          <h2 className="content__title">Все пиццы</h2>
-          <div className="content__items">
-            {pizzas.map((obj: PizzaType) => {
-              return < PizzaBlog {...obj} key={obj.id.toString()} />
-            })}
           </div>
         </div>
       </div>
-    </div>
-
+    </BrowserRouter>
   );
 }
 

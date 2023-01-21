@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react'
 import PizzaBlog from '../components/PizzaBlog';
 import Categories from '../components/Сategories';
 import Sort from '../components/Sort';
@@ -27,8 +28,23 @@ const Home: React.FC<HomeProps> = ({ searchValue }) => {
     const sort = activeSort.sort.replace('-', '')
     const categoryId = activeCategory
 
+    //pagination 
+    const [activePage, setActivePage] = useState<number>(1)
+    const [needItem] = useState(4)
+    const countPages = []
+    for (let i = 1; i <= Math.ceil(pizzas.length / needItem); i++) {
+        countPages.push(i)
+    }
+    const lastIndexPage = activePage * needItem
+    const firstIndexPage = lastIndexPage - needItem
+    const pizzaItems = pizzas.slice(firstIndexPage, lastIndexPage)
+    const chengePage = (page: number) => {
+        setActivePage(page)
+    }
+
 
     React.useEffect(() => {
+        console.log('start')
         dispatch(getPizzaFetch({ sort, categoryId, sortFilter, searchValue }))
     }, [activeCategory, activeSort, searchValue])
 
@@ -40,10 +56,18 @@ const Home: React.FC<HomeProps> = ({ searchValue }) => {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-                {status !== 'pending' ? pizzas.map((obj: PizzaType) => {
+                {status !== 'pending' ? pizzaItems.map((obj: PizzaType) => {
                     return < PizzaBlog {...obj} key={obj.id.toString()} />
-                }) : <span>Loading...</span>}
+                })
+                    : <span>Loading...</span>}
 
+
+                {status !== 'pending' ? <div>
+                    {countPages.map((el) => {
+                        return <span onClick={() => chengePage(el)} key={el} className='currentPage'> {el} </span>
+                    })}
+                </div>
+                    : ''}
             </div>
         </div>
     );
